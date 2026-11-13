@@ -8,4 +8,11 @@ export default defineConfig({
     strictPort: true,
     open: true,
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/styles/vars" as *;`,
+      },
+    },
+  },
 });
