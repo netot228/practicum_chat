@@ -1,0 +1,58 @@
+@mixin setLightThemeVariables {
+  // this rule
+  // color-scheme: light dark;
+  // allows you to use function: light-dark(LightValue, DarkValue) for all css values
+
+  color-scheme: only light;
+
+  --bg-color: #f1f4fc;
+}
+%setLightThemeVariables {
+  @include setLightThemeVariables;
+}
+
+:root {
+  @include setLightThemeVariables;
+}
+
+@mixin setDarkThemeVariables {
+  color-scheme: only dark;
+
+  --bg-color: #202020;
+}
+
+%setDarkThemeVariables {
+  @include setDarkThemeVariables;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include setDarkThemeVariables;
+  }
+  :root[data-theme='light'] {
+    @include setLightThemeVariables;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    @include setLightThemeVariables;
+  }
+  :root[data-theme='dark'] {
+    @include setDarkThemeVariables;
+  }
+}
+
+// миксин для кастомизации под
+
+@mixin screenW($size) {
+  @media screen and (max-width: $size) {
+    @content;
+  }
+}
+
+@mixin screenH($size) {
+  @media screen and (max-height: $size) {
+    @content;
+  }
+}
